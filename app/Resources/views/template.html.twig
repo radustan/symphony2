@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    <link rel="stylesheet" href="{{ asset('css/styles.css') }}"/>
+    {% block stylesheets %}{% endblock %}
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+</head>
+<body>
+<nav class="navbar navbar-inverse" role="navigation">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a href= "#" class="navbar-brand">My test App</a>
+    </div>
+    <div class="collapse navbar-collapse">
+        <ul class="nav navbar-nav">
+            <li class="active "><a href="#">Home</a></li>
+        </ul>
+        {% if users.isLoggedIn() %}
+            <div class="nav navbar-nav navbar-right">
+                <p class="navbar-text">{{ message }}</p>
+                <a href="{{ path('logout') }}" class="btn btn-default navbar-btn">Logout</a>
+            </div>
+        {% else %}
+            <div class="nav navbar-nav navbar-right">
+                <a href="{{ path('signup_homepage') }}" class="btn btn-default navbar-btn">Signup</a>
+                <a href="{{ path('login_homepage') }}" class="btn btn-default navbar-btn">Login</a>
+            </div>
+        {% endif %}
+    </div>
+</nav>
+<div class="container">
+    {% block body %}{% endblock %}
+</div>
+<script src="{{ asset('js/javascript.js') }}"></script>
+{% block javascripts %}{% endblock %}
+</body>
+</html>

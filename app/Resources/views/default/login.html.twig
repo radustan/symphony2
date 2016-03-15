@@ -1,0 +1,30 @@
+{% extends 'login.html.twig' %}
+{% block container %}
+    <form class="form-signin" method="post" action="{{ path('login_homepage') }}">
+        <h2 class="form-signin-heading">Please sign in</h2>
+        <label for="inputEmail" class="sr-only">Email address</label>
+        <input type="text" id="inputEmail" name="username" class="form-control" placeholder="Username" required autofocus>
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password" required>
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" value="remember-me"> Remember me
+            </label>
+        </div>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+        <a href="{{ path('signup_homepage') }}"> Sign up</a>
+    </form>
+
+    {% if name is defined%}
+    <div class="alert-info fade in">
+        <strong>Hello {{ name }}</strong>
+    </div>
+    {% endif %}
+    {% if error is defined%}
+        <div class="alert-danger fade in">
+            <strong>Error: {{ error }}</strong>
+        </div>
+    {% endif %}
+    </div>
+{% endblock %}
+

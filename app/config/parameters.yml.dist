@@ -17,3 +17,7 @@ parameters:
 
     # A secret key that's used to generate certain security-related tokens
     secret:            ThisTokenIsNotSoSecretChangeIt
+    parse_app_id: APPLICATION_ID
+    parse_rest_key: restkey
+    parse_master_key: myMasterKey
+    parse_server_url: http://127.0.0.1:1337/parse

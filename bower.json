@@ -1,0 +1,23 @@
+{
+  "name": "symphony2",
+  "homepage": "https://github.com/radustan/symphony2",
+  "authors": [
+    "radustan <raduadrian.stan@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "vendor/",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^2.2.1",
+    "bootstrap": "^3.3.6"
+  }
+}

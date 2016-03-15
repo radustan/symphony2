@@ -1,0 +1,24 @@
+{% extends 'login.html.twig' %}
+{% block container %}
+    <form id="form" class="well" method="post" action="{{ path('signup_homepage') }}">
+        <h2>
+            Sign Up
+        </h2>
+        <label>Username</label>
+        <input type="text" name="username" value="" class="form-control input-lg">
+        <label>Email</label>
+        <input type="text" name="email" value="" class="form-control input-lg">
+        <label>Password</label>
+        <input type="password" name="password" value="" class="form-control input-lg">
+        <div>
+            <button class="btn btn-primary top10" type="submit">
+                Create account
+            </button>
+            <button class="btn btn-primary top10 pull-right" href="{{ path('login_homepage') }}">
+                Back to login
+            </button>
+        </div>
+    </form>
+
+
+{% endblock %}

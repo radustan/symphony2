@@ -4,6 +4,9 @@ parameters:
 #    parameter_name: value
 
 services:
+    parse.connection:
+        class: AppBundle\Parse\Connection
+        arguments: ["%parse_app_id%", "%parse_rest_key%", "%parse_master_key%", "%parse_server_url%"]
 #    service_name:
 #        class: AppBundle\Directory\ClassName
 #        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
