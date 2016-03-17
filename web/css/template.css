@@ -1,0 +1,68 @@
+.nav-custom.navbar {
+    background-image: linear-gradient(#54B4EB, #2FA4E7 60%, #1D9CE5);
+    background-repeat: no-repeat;
+    border-bottom: 1px solid #178ACC;
+    box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 0px;
+}
+
+.nav-custom.navbar-default {
+    background-color: #2FA4E7;
+    border-color: #1995DC;
+}
+
+.nav-custom.navbar-default .navbar-brand,
+.nav-custom.navbar-default .navbar-brand:hover,
+.nav-custom.navbar-default .navbar-brand:focus ,
+.nav-custom.navbar-default .navbar-nav > li > a {
+    color: #FFF;
+}
+
+.nav-custom.navbar-default .navbar-nav > li > a:hover,
+.nav-custom.navbar-default .navbar-nav > li > a:hover,
+.nav-custom.navbar-default .navbar-nav>.active>a,
+.nav-custom.navbar-default .navbar-nav>.active>a:hover,
+.nav-custom.navbar-default .navbar-nav>.active>a:focus
+.nav-custom.navbar-default .navbar-nav > li .active {
+    color: #FFF;
+    background-color: #178ACC;
+}
+
+.nav-custom.navbar-default .navbar-nav > li.navbar-text{
+    color: #F9F9F9;
+    font-weight: bold;
+}
+
+.nav-custom.navbar-default .navbar-toggle:hover,
+.nav-custom.navbar-default .navbar-toggle:focus {
+    background-color: #178ACC;
+}
+
+.nav-custom.navbar-default .navbar-toggle {
+    border-color: #178ACC;
+}
+
+.nav-custom.navbar-default .navbar-toggle .icon-bar {
+    background-color: #FFF;
+}
+
+.top5 { margin-top:5px; }
+.top7 { margin-top:7px; }
+.top10 { margin-top:10px; }
+.top15 { margin-top:15px; }
+.top17 { margin-top:17px; }
+.top30 { margin-top:30px; }
+
+.block-padding {
+    background: #FAFAFA;
+    padding: 20px;
+}
+.primary-table>tbody>tr>td,
+.primary-table>thead>tr>th
+{
+    border: solid 2px #c8c8c8;
+}
+.primary-table thead {
+    background-color: #54B4EB;
+    color: #F9F9F9;
+}

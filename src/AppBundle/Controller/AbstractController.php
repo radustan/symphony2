@@ -1,10 +1,7 @@
 <?php
 namespace AppBundle\Controller;
-use AppBundle\AppBundle;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 use AppBundle\Parse\Connection;
-use AppBundle\Parse\Test;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 abstract class AbstractController extends Controller
@@ -14,5 +11,10 @@ abstract class AbstractController extends Controller
         /** @var Connection $parseConnection */
         $parseConnection = $this->get('parse.connection');
         $parseConnection->connect();
+    }
+
+    public function parseFactory($className)
+    {
+        return $this->get('parse.'.$className);
     }
 }

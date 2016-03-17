@@ -2,8 +2,6 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Parse\Connection;
-use AppBundle\Parse\Test;
 use Parse\ParseException;
 use Parse\ParseUser;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -22,8 +20,7 @@ class DefaultController extends AbstractController
         $currentUser = ParseUser::getCurrentUser();
         if ($currentUser) {
             return $this->render('default/index.html.twig', array(
-                'message' => 'Welcome, ' . $currentUser->getUsername(),
-                'logged_in' => 1
+                'message' => 'Welcome, ' . $currentUser->getUsername()
             ));
         } else {
             return $this->render('default/index.html.twig', array(
@@ -48,26 +45,18 @@ class DefaultController extends AbstractController
             $password = $request->get('password');
             try{
                 $this->parseConnect();
-                $user = ParseUser::logIn($username, $password);
+                ParseUser::logIn($username, $password);
                 return $this->redirectToRoute('homepage');
-                /*return $this->render(
-                    'default/login.html.twig',
-                    array(
-                        'name' => $user->getEmail()
-                    )
-                );*/
             } catch (ParseException $e) {
-                return $this->render(
-                    'default/login.html.twig',
-                    array(
-                        'error' => $e->getMessage()
-                    )
+                $this->addFlash(
+                    'notice',
+                    $e->getMessage()
                 );
+                return $this->render('default/login.html.twig');
             }
         } else {
             return $this->render('default/login.html.twig');
         }
-
     }
 
     /**
@@ -86,9 +75,18 @@ class DefaultController extends AbstractController
                 $user->setEmail($email);
                 $user->setUsername($username);
                 $user->signUp();
+
+                $this->addFlash(
+                    'notice',
+                    'Signup successful. You can login now'
+                );
+
                 return $this->redirectToRoute('login_homepage');
-            } catch (Exception $e) {
-                echo $e->getMessage();
+            } catch (ParseException $e) {
+                $this->addFlash(
+                    'notice',
+                    $e->getMessage()
+                );
             }
         }
 
