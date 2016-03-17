@@ -6,7 +6,19 @@ parameters:
 services:
     parse.connection:
         class: AppBundle\Parse\Connection
+        arguments: ["%parse_app_id%", "%parse_rest_key%", "%parse_master_key%", "%parse_server_url%", false]
+    parse.user:
+        class: AppBundle\Parse\User
         arguments: ["%parse_app_id%", "%parse_rest_key%", "%parse_master_key%", "%parse_server_url%"]
+    parse.products:
+        class: AppBundle\Parse\Products
+        arguments: ["%parse_app_id%", "%parse_rest_key%", "%parse_master_key%", "%parse_server_url%"]
+    app.loggedin.action_listener:
+            class: AppBundle\EventListener\LoggedInListener
+            arguments: [ @router, @service_container ]
+            tags:
+                #- { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
+                - { name: kernel.event_listener, event: kernel.controller, method: onKernelController }
 #    service_name:
 #        class: AppBundle\Directory\ClassName
 #        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]

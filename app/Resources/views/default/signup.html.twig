@@ -1,9 +1,10 @@
 {% extends 'login.html.twig' %}
 {% block container %}
-    <form id="form" class="well" method="post" action="{{ path('signup_homepage') }}">
-        <h2>
-            Sign Up
-        </h2>
+    <form id="form" class="form-signin" method="post" action="{{ path('signup_homepage') }}">
+        {% for flash_message in app.session.flashbag.get('notice') %}
+            <div class="alert alert-info" role="alert"> {{ flash_message }}</div>
+        {% endfor %}
+        <h2 class="form-signin-heading">Create you account</h2>
         <label>Username</label>
         <input type="text" name="username" value="" class="form-control input-lg">
         <label>Email</label>
@@ -14,11 +15,9 @@
             <button class="btn btn-primary top10" type="submit">
                 Create account
             </button>
-            <button class="btn btn-primary top10 pull-right" href="{{ path('login_homepage') }}">
+            <a class="btn btn-primary top10 pull-right" href="{{ path('login_homepage') }}">
                 Back to login
-            </button>
+            </a>
         </div>
     </form>
-
-
 {% endblock %}

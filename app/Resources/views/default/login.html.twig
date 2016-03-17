@@ -2,6 +2,9 @@
 {% block container %}
     <form class="form-signin" method="post" action="{{ path('login_homepage') }}">
         <h2 class="form-signin-heading">Please sign in</h2>
+        {% for flash_message in app.session.flashbag.get('notice') %}
+            <div class="alert alert-info" role="alert"> {{ flash_message }}</div>
+        {% endfor %}
         <label for="inputEmail" class="sr-only">Email address</label>
         <input type="text" id="inputEmail" name="username" class="form-control" placeholder="Username" required autofocus>
         <label for="inputPassword" class="sr-only">Password</label>
@@ -12,7 +15,9 @@
             </label>
         </div>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-        <a href="{{ path('signup_homepage') }}"> Sign up</a>
+        <div  class="top10">
+            <a href="{{ path('signup_homepage') }}">Don't have an account yet? Sign up</a>
+        </div>
     </form>
 
     {% if name is defined%}
