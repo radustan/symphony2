@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/radustan/symphony2#readme",
   "dependencies": {
+    "bower": "1.2.6",
     "gulp": "^3.9.1",
     "gulp-concat": "^2.6.0",
     "gulp-if": "^2.0.0",
