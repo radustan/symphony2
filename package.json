@@ -29,5 +29,15 @@
     "gulp-sourcemaps": "^1.6.0",
     "gulp-uglify": "^1.5.3",
     "gulp-uglifycss": "^1.0.6"
+  },
+  "extra": {
+    "heroku": {
+      "document-root": "web",
+      "php-config": [
+        "date.timezone=Europe/Amsterdam",
+        "display_errors=off",
+        "short_open_tag=off"
+      ]
+    }
   }
 }
