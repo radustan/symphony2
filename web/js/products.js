@@ -1,33 +1,37 @@
 $(document).ready(function(){
     $('#myModal').on('hidden.bs.modal', function () {
         $('.err-msg').hide();
-    })
+        $('.block-loading').hide();
+    });
     $('#createPrdBtn').on('click', function(e){
         $('.block-loading').show();
         var formData = new FormData($('#addProductForm')[0]);
         e.preventDefault();
-        $.ajax({
-            url: $('#addProductForm').attr('action'), //this is the submit URL
-            type: 'POST', //or POST,
-            enctype: "multipart/form-data",
-            cache: false,
-            contentType: false,
-            processData: false,
-            async: false,
-            data: formData,//$('#addProductForm').serialize(),
-            success: function(data){
-                $('.block-loading').hide();
-                if (data.success) {
-                    $('#addProductForm')[0].reset();
-                    $('#myModal').modal('hide');
-                    window.location.replace( $('#addProductForm').attr('redirect'));
-                } else {
-                    $('.err-msg').show();
-                    $('#err').html(data.message);
-                }
+        setTimeout(function(){
+            $.ajax({
+                url: $('#addProductForm').attr('action'), //this is the submit URL
+                type: 'POST', //or POST,
+                enctype: "multipart/form-data",
+                cache: false,
+                contentType: false,
+                processData: false,
+                async: false,
+                data: formData,//$('#addProductForm').serialize(),
+                success: function(data){
+                    $('.block-loading').hide();
+                    if (data.success) {
+                        $('#addProductForm')[0].reset();
+                        $('#myModal').modal('hide');
+                        window.location.replace( $('#addProductForm').attr('redirect'));
+                    } else {
+                        $('.err-msg').show();
+                        $('#err').html(data.message);
+                    }
 
-            }
-        });
+                }
+            });
+        }, 500);
+
     });
 
     function readURL(input) {
