@@ -70,3 +70,16 @@
 .locationShow {
     white-space: normal;
 }
+
+.block-loading {
+    width: 100%;
+    height: 100%;
+    background-image: url("../img/loader.gif");
+    background-repeat: no-repeat;
+    background-color: #F9F9F9;
+    position: absolute;
+    background-position: center;
+    z-index: 1001;
+    opacity: 0.95;
+
+}

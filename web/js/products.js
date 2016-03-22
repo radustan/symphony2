@@ -1,5 +1,9 @@
 $(document).ready(function(){
+    $('#myModal').on('hidden.bs.modal', function () {
+        $('.err-msg').hide();
+    })
     $('#createPrdBtn').on('click', function(e){
+        $('.block-loading').show();
         var formData = new FormData($('#addProductForm')[0]);
         e.preventDefault();
         $.ajax({
@@ -12,9 +16,16 @@ $(document).ready(function(){
             async: false,
             data: formData,//$('#addProductForm').serialize(),
             success: function(data){
-                $('#addProductForm')[0].reset();
-                $('#myModal').modal('hide');
-                window.location.replace( $('#addProductForm').attr('redirect'));
+                $('.block-loading').hide();
+                if (data.success) {
+                    $('#addProductForm')[0].reset();
+                    $('#myModal').modal('hide');
+                    window.location.replace( $('#addProductForm').attr('redirect'));
+                } else {
+                    $('.err-msg').show();
+                    $('#err').html(data.message);
+                }
+
             }
         });
     });
@@ -52,7 +63,6 @@ $(document).ready(function(){
     }
 
     $('.locationShow').on('click', function () {
-        console.log($(this).data('lat'));
         var lat = '';
         var long = '';
 
@@ -65,7 +75,7 @@ $(document).ready(function(){
 
         var latlon = lat + "," + long;
         var img_url = "http://maps.googleapis.com/maps/api/staticmap?center="
-            +latlon+"&zoom=14&size=400x300&sensor=true&markers="+latlon;
+            +latlon+"&zoom=14&size=568x300&sensor=true&markers="+latlon;
         $("#mapholder").html("<img class='img-responsive' src='"+img_url+"'>");
 
     })
