@@ -64,10 +64,9 @@ $(document).ready(function(){
         }
 
         var latlon = lat + "," + long;
-
         var img_url = "http://maps.googleapis.com/maps/api/staticmap?center="
             +latlon+"&zoom=14&size=400x300&sensor=true&markers="+latlon;
-        $("#mapholder").html("<img src='"+img_url+"'>");
+        $("#mapholder").html("<img class='img-responsive' src='"+img_url+"'>");
 
     })
 
