@@ -21,7 +21,7 @@ class ProductsController extends AbstractController implements LoggedInInterface
     /** @Route("/products", name="products") */
     public function indexAction()
     {
-        $products = ParseCloud::run('getActiveProducts');
+        $products = ParseCloud::run('getActiveProducts', array('currentUser' => ParseUser::getCurrentUser()->getObjectId()));
         $headers = array('Name', 'Price', 'Image', 'Actions', 'Created');
         return $this->render(
             'products/index.html.twig',
