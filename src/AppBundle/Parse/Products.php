@@ -56,4 +56,10 @@ class Products extends ParseAbstract
         return $result;
     }
 
+    public function setIsDeleted($isDeleted)
+    {
+        $this->object->set('isDeleted', $isDeleted);
+        return $this;
+    }
+
 }

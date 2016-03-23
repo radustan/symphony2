@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 use AppBundle\Parse\Products;
 use AppBundle\Parse\User;
+use Parse\ParseCloud;
 use Parse\ParseException;
 use Parse\ParseFile;
 use Parse\ParseGeoPoint;
@@ -20,10 +21,8 @@ class ProductsController extends AbstractController implements LoggedInInterface
     /** @Route("/products", name="products") */
     public function indexAction()
     {
-        /** @var Products $product */
-        $product = $this->parseFactory('Products');
-        $products = $product->getAll();
-        $headers = array('Name', 'Price', 'Image', 'Location', 'Date created');
+        $products = ParseCloud::run('getActiveProducts');
+        $headers = array('Name', 'Price', 'Image', 'Actions', 'Created');
         return $this->render(
             'products/index.html.twig',
             array(
@@ -47,11 +46,13 @@ class ProductsController extends AbstractController implements LoggedInInterface
             /** @var UploadedFile $img */
             $img = $request->files->get('image');
             try {
+                $this->validateAddParams($request);
                 /** @var Products $product */
                 $product = $this->parseFactory('Products');
                 $product->create()
                     ->setName($name)
                     ->setPrice((float)$price)
+                    ->setIsDeleted(0)
                     ->setCreatedBy();
                 if ($latitude !=0 && $longitude != 0) {
                     $point = new ParseGeoPoint($request->get('latitude', 0), $request->get('longitude', 0));
@@ -91,5 +92,42 @@ class ProductsController extends AbstractController implements LoggedInInterface
            return $response;
 
         }
+    }
+
+    protected function validateAddParams($request)
+    {
+        $name = $request->get('name');
+        $price = $request->get('price');
+        if (empty($name)) {
+            throw new Exception('Name is required');
+        }
+        if (empty($price)) {
+            throw new Exception('Price is required');
+        }
+    }
+
+    public function deleteAction($id)
+    {
+        $this->parseConnect();
+
+        try {
+            $message = ParseCloud::run('deleteProduct', array('id' => $id, 'createdBy' => ParseUser::getCurrentUser()->getObjectId()));
+            $this->addFlash(
+                'notice',
+                $message
+            );
+        } catch (ParseException $e) {
+            $this->addFlash(
+                'notice',
+                $e->getMessage()
+            );
+        } catch (Exception $e) {
+            $this->addFlash(
+                'notice',
+                $e->getMessage()
+            );
+        }
+
+        return $this->redirectToRoute('products');
     }
 }

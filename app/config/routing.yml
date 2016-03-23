@@ -19,5 +19,8 @@ products:
 products.add:
     path:     /products/add
     defaults: { _controller: AppBundle:Products:add }
+products.delete:
+    path:     /products/delete/{id}
+    defaults: { _controller: AppBundle:Products:delete }
 
 

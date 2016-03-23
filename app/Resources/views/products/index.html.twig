@@ -42,12 +42,17 @@
                             <a href="#" data-toggle="modal" data-target="#locationModal"
                                    data-lat="{{ product.get('location').getLatitude() }}"
                                    data-long="{{ product.get('location').getLongitude() }}"
-                                   class="btn btn-default locationShow">
-                                    <i class="glyphicon glyphicon-map-marker"></i> View on map
+                                   class="btn btn-default locationShow" title="View on map">
+                                    <i class="glyphicon glyphicon-map-marker"></i>
                                 </a>
                             {% endif %}
+                            <a href="{{ path('products.delete', {'id': product.getObjectId()}) }}"
+                                onclick="return confirm('Are you sure?')" title="Delete Item"
+                                class="btn btn-default">
+                                <i class="glyphicon glyphicon-remove"></i>
+                            </a>
                         </td>
-                        <td>{{ product.getUpdatedAt()|date('Y-m-d H:i:s') }}</td>
+                        <td>{{ product.getUpdatedAt()|date('Y-m-d') }}</td>
                     </tr>
                 {% endfor %}
                 </tbody>
